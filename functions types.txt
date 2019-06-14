@@ -1,0 +1,202 @@
+important links :
+
+every thing you should know about functions >>  http://www.bryanbraun.com/2014/11/27/every-possible-way-to-define-a-javascript-function
+concepts >> http://javascriptissexy.com/16-javascript-concepts-you-must-know-well/
+design patterns you should know >>  https://scotch.io/bar-talk/4-javascript-design-patterns-you-should-know
+JS OOP >>  http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/
+==================================================================================================================================================================================================================================================================
+
+Hoisting : 
+you can call the functions before they�re written in your code. It won�t matter,
+because the entire function gets hoisted to the top of its containing scope. 
+
+1. Anonymous functions (they don�t need names)
+2- IIFE 
+3- call back 
+
+======================================================================================
+
+1-functions declaration :
+
+function sum(num1,num2){
+  return num1 + num2;
+}
+
+Functions declared like this are "hoisted", meaning,
+the javascript engine reads all these declarations first before executing any of the rest of the code. 
+The declaration statement stands alone, and cannot be combined with other expressions.
+Also, notice that this declaration does not need to be followed with a semicolon.
+
+======================================================================================
+
+2-Function Expressions:
+
+2-1 Variable Assignment :
+
+	
+// Named
+var sum = function add(num1,num2){
+  return num1 + num2;
+};
+
+// Anonymous
+var sum = function(num1, num2){
+  return num1 + num2;
+};
+
+This is functionally equivalent to the Function Declaration above, except this variation is NOT hoisted. 
+The name of our function (add) cannot be called directly (see below), but it can come in handy when debugging:
+
+sum(1,1);
+// returns 2
+
+add(1,1);
+// "add is not defined"
+
+
+------------------------------------------
+
+2-2 Immediately invoked : 
+
+// Named
+(function sum(num1, num2){
+  return num1 + num2;
+}(1, 2));
+
+// Anonymous
+(function(num1, num2){
+  return num1 + num2;
+}(1, 2));
+
+This function is immediately invoked, meaning that it is defined and called at the same time.
+ The function's name is only available within its execution scope (defined by the parentheses), so it cannot be called later in the program.
+
+sum(1,1);
+// "sum is not defined"
+
+Immediately invoked functions can be used to encapsulate a program, preventing it from polluting the global namespace
+
+------------------------------------------
+
+2-3 Assigned and Invoked :
+
+// Named
+var sum = function add(num1, num2){
+  return num1 + num2;
+}(1, 2);
+
+// Anonymous
+var sum = function(num1, num2){
+  return num1 + num2;
+}(1, 2);
+
+This is a combination of the variable assignment expression and the immediately invoked function (both demonstrated above).
+ One neat application for the named variety of this is to make recursive functions more readable,
+ by substituting arguments.callee with your function name.
+
+------------------------------------------
+
+2-4 Property Assignment :
+
+// Named
+var obj1 = {
+  sum: function add(num1, num2) {
+    return num1 + num2
+  }
+};
+
+// Anonymous
+var obj2 = {
+  sum: function(num1, num2) {
+    return num1 + num2
+  }
+};
+
+By assigning functions (either named or unnamed) to properties of objects, we define methods on those objects.
+ This has many applications in object oriented programming. We can also use this to namespace our functions,
+ and keep them out of the global scope.
+
+Here's how we would call the methods defined in the examples:
+
+obj1.sum(1, 2);
+// returns 3
+
+obj2.sum(1, 2);
+// returns 3
+
+------------------------------------------
+
+2-5 Passed as Argument (callback) :
+
+// Named
+window.setTimeout(function add(){
+  alert(1 + 2);
+}, 500);
+
+// Anonymous
+window.setTimeout(function(){
+  alert(1 + 2);
+}, 500);
+
+Function names in ECMAScript are nothing more than variables, meaning we can pass them around like variables.
+ Many methods (like setTimeout()) take functions as arguments. This is a common pattern for defining callbacks.
+In these examples, we define them in line, but we could also pass in predefined functions.
+
+------------------------------------------
+
+2-6 Returned (closure) :
+
+// Named
+function counter() {
+    var count = 0;
+    return function c() {
+        alert(count++);
+    }
+}
+
+// Anonymous
+function counter() {
+    var count = 0;
+    return function() {
+        alert(count++);
+    }
+}
+
+Functions can be returned from other functions. This lets us do clever things like the following (picking up from the example):
+
+var bob = {}, rob = {};
+bob.count = counter();
+rob.count = counter();
+bob.count(); // alerts "0"
+bob.count(); // alerts "1"
+rob.count(); // alerts "0"
+rob.count(); // alerts "1"
+
+Each person can increment their own count variable despite the fact that it originated outside the scope of the count() function.
+ This is called a closure
+
+------------------------------------------
+
+2-7 Arrow Functions :
+
+// There is no "named" form of this function.
+
+// Anonymous
+var sum = (num1, num2) => {return num1 + num2};
+
+// Anonymous w/out optional bracketed return
+var sum = (num1, num2) => num1 + num2;
+
+Arrow (or "fat-arrow") functions are newly introduced as part of the ES6 specification. 
+As such, they are only implemented in the most modern browsers (check a compatibility table for specifics). This example:
+
+var sum = (num1, num2) => {return num1 + num2};
+is functionally equivalent to:
+
+var sum = function(num1, num2) {
+  return num1 + num2;
+};
+Arrow functions are function expressions, and as such, they are usable in all the contexts shown above (variable assignment,
+ passed as an argument, etc.). You may see slight syntactical variations across uses (as shown with in the example with optional brackets). 
+Here's a good blog post that explains the syntax and it's variations.
+

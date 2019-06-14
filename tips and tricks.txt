@@ -1,0 +1,79 @@
+1 – Don’t forget var keyword when assigning a variable’s value for the first time.
+
+Assignment to an undeclared variable automatically results in a global variable being created. Avoid global variables.
+
+2 – use === instead of ==
+
+The == (or !=) operator performs an automatic type conversion if needed. The === (or !==) operator will not perform any conversion. It compares the value and the type, which could be considered faster than ==.
+
+[10] === 10    // is false
+[10]  == 10    // is true
+'10' == 10     // is true
+'10' === 10    // is false
+ []   == 0     // is true
+ [] ===  0     // is false
+ '' == false   // is true but true == "a" is false
+ '' ===   false // is false 
+
+3 – undefined, null, 0, false, NaN, '' (empty string) are all falsy.
+
+4 – Use Semicolons for line termination :
+The use of semi-colons for line termination is a good practice. You won’t be warned if you forget it,
+because in most cases it will be inserted by the JavaScript parser. 
+
+5 – Create an object constructor
+
+function Person(firstName, lastName){
+    this.firstName =  firstName;
+    this.lastName = lastName;        
+}  
+
+var Saad = new Person("Saad", "Mousliki");
+
+7 – Create a Self-calling Function
+
+This is often called a Self-Invoked Anonymous Function or Immediately Invoked Function Expression (IIFE). It is a function that executes automatically when you create it, and has the following form:
+
+(function(){
+    // some private code that will be executed automatically
+})();  
+(function(a,b){
+    var result = a+b;
+    return result;
+})(10,20)
+
+
+8 – Get a random item from an array
+
+var items = [12, 548 , 'a' , 2 , 5478 , 'foo' , 8852, , 'Doe' , 2145 , 119];
+
+var  randomItem = items[Math.floor(Math.random() * items.length)];
+
+31 – Serialization and deserialization (working with JSON)
+
+var person = {name :'Saad', age : 26, department : {ID : 15, name : "R&D"} }; 
+var stringFromPerson = JSON.stringify(person); 
+/* stringFromPerson is equal to "{"name":"Saad","age":26,"department":{"ID":15,"name":"R&D"}}"   */ 
+var personFromString = JSON.parse(stringFromPerson);  
+/* personFromString is equal to person object  */
+
+32 – Avoid the use of eval() or the Function constructor
+
+Use of eval or the Function constructor are expensive operations as each time they are called script engine must convert source code to executable code.
+
+var func1 = new Function(functionCode);
+var func2 = eval(functionCode);
+
+
+35 – Pass functions, not strings, to setTimeout() and setInterval()
+
+If you pass a string into setTimeout() or setInterval(), the string will be evaluated the same way as with eval, which is slow. Instead of using…
+
+setInterval('doSomethingPeriodically()', 1000);  
+setTimeout('doSomethingAfterFiveSeconds()', 5000);
+…use…
+
+setInterval(doSomethingPeriodically, 1000);  
+setTimeout(doSomethingAfterFiveSeconds, 5000);
+
+

@@ -1,0 +1,130 @@
+javascript:
+1-case sensitive  2-browser dependent   3-platform independent  4-object base
+==javascript variables are loosely typed(can change type at runtime )  and initial value undefined  
+==constant variables are  const myVar=5; are read-only  cannot change its value 
+== undefined means variables does not assigned to value yet 
+== typeof used to return the type of variables  ex:typeof myvar; 
+
+==javascript coercion means when js compare two data types with each others like  boolean==integer  js will evaluate that
+boolean converted to false  and false equal zero  means boolean==integer hykon true  that happend with == only  and === the coercion will not happened 
+
+example in coercion 
+// Returns true
+undefined == null;
+null == undefined;
+ 
+// Returns false
+undefined === null;
+null === undefined;
+
+var sNumber, iNumber;
+sNumber = '42';
+iNumber = 42;
+ 
+// Equality comparisons yields true
+sNumber == iNumber;
+ 
+// Strict comparison yields false
+sNumber === iNumber;
+
+
+==for..in used to loop through object 
+example:
+for (variablename in object) {   statement;  }
+== window is the global object 
+
+==parse int() used to convert value to number 
+example:
+parseInt(�3a�) //returns 3
+
+parseInt(�a3�) //returns NAN  note if start with number will evaluted to NAN 
+
+==number() used to convert the datatype to its integer value 
+example:
+myVar = new Boolean("true") document.write(Number(myVar))  // returns 1
+==IsNaN() used to evalute value that is NAN oR Not 
+example
+document.write(isNaN(�hello�)) //returns true document.write(isNaN("348")) //returns false
+==eval(expression) used to evaluate string expression to integer values 
+example
+f=999; w=777;  document.write(eval(f + w));  // returns 1776
+
+==javascript hoisting  variables with var are hoisted and will be undefined 
+  js function declaration will be hoisted 
+  any variables with let and const  willnot be hoisted 
+
+
+==js objects fall in 4 categories 
+   -custom object
+   -built in (string,function,math,number,array)
+   -BOM(browser object model)
+   -DoM(document object model)
+
+
+
+==js array created with three ways 
+  - Array n=new Array();
+    n[0]="blue";
+  -Array n=new Array("blue","yellow");
+  -var arr = [�apple", �banana", �grapes"]; 
+==js associative array is an array with string indcies 
+  -var assocArray = new Array( );  assocArray["one"] = "one"; 
+
+====================================================================================================================
+
+ ==window object have some objects like (navigator,screen,history,location,document)
+   -window is the global object is javascript 
+   -window have some methods like (Settimeout,setinterval,cleartimeout,clearinterval,scrollby)
+   -window.navigator have some options (.appversion,.cookieenabled,.platform)
+   -window.location have some options (.hostname,.por,.host)
+   -window.history have some methods(go(),back(),forward())
+   -window.document have some methods (getelementbyid(),getelementbyname(),getelementbytagname())
+== javascript events are (onmouseover,onblur,onclick)
+==<a href="javascript:void(0)" onclick="alert('hi')" > // browseer will ignore href action and will not go to any place 
+   and we can make with  return false  <a href=�1.htm� onclick=�myFunc();return false�> 
+======================================================================================================================
+  == document object have some collections like  links, anchors, images, forms are
+     collection/array containing all occurrences of those objects within the document.
+  == javascript cookies 
+    -cookies are two types 
+      1-session cookie: have expiry date when user close browser 
+      2-persistent cookie : expiry date and stored i user harddisk 
+    -cookie limitation 
+      1- only 300 cookie 
+      2-max size for cookie 4kb
+      3-each site have only 20 cookie 
+    - cookie have some functions we used are getcookie(),setcookie(),deletecookie()
+========================================================================================================================
+  ==Selecting the first item with id someID
+     document.queryselect("div");
+  ==Selecting all the divs in the current container   
+     document.querySelectorAll("div"); 
+
+   ==Access nodes: � Using parent/child relationship properties parentNode, childNodes, firstChild, lastChild, nextSibling, previousSibling  � Using getElementsById(), getElementsByTagName(), getElementsByName() 
+  � Modify nodes: � Using innerHTML or innerText/textContent  � Using nodeValue or setAttribute() or just using attributes as object properties 
+  � Remove nodes with � removeChild() or replaceChild() � And add new ones with  � appendChild(), cloneNode(), insertBefore() 
+
+==========================================================================================================================
+ == javascript event object 
+   --two way to detect events 
+     1-capture phase  goes down
+     2-bubbling phase goes up 
+   -- we can stop capture and bubbling using 
+     1-stopPropagation() 
+     2-cancelbubble()
+    -- Event object have some methods like 
+     1-removeeventlistner()
+     2-addeventlistner()
+     3-preventdefault()
+================================================================================================================================
+ == javascript error handling 
+    - try{} catch( ex ){} finally{}
+    -onerror  object in window object  is fired when error is happen 
+    ex:   window.onerror=function(){ ................}
+
+    
+console.log(1 < 2 < 3); true 1<2 => true true < 3 true because true is 1
+console.log(3 > 2 > 1);false3 > 2 true true > 1 false because true is 1 and 1 isn't bigger than 1
+
+
+
