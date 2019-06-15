@@ -6,7 +6,8 @@
 var person = {
     firstName: "Penelope",
     lastName: "Barrymore",
-    fullName: function() {​ // Notice we use "this" just as we used "he" in the example sentence earlier?:
+    fullName: function () {
+        ​ // Notice we use "this" just as we used "he" in the example sentence earlier?:
         console.log(this.firstName + " " + this.lastName);​ // We could have also written this:​
         console.log(person.firstName + " " + person.lastName);
     }
@@ -26,7 +27,7 @@ and it is usually used inside a function or a method,
 
 // A very common piece of jQuery code
 
-$("button").click(function(event) {
+$("button").click(function (event) {
     // $(this) will have the value of the button ($("button")) object
     // because the button object invokes the click () method
     console.log($(this).prop("name"));
@@ -58,7 +59,7 @@ The this keyword is most misunderstood when
 var person = {
     firstName: "Penelope",
     lastName: "Barrymore",
-    showFullName: function() {
+    showFullName: function () {
         // The "context"
         console.log(this.firstName + " " + this.lastName);
     }
@@ -84,11 +85,16 @@ person.showFullName.apply(anotherPerson); // Rohit Khan
 
 // We have a simple object with a clickHandler method that we want to use when a button on the page is clicked
 var user = {
-    data: [
-        { name: "T. Woods", age: 37 },
-        { name: "P. Mickelson", age: 43 }
+    data: [{
+            name: "T. Woods",
+            age: 37
+        },
+        {
+            name: "P. Mickelson",
+            age: 43
+        }
     ],
-    clickHandler: function(event) {
+    clickHandler: function (event) {
         var randomNum = ((Math.random() * 2 | 0) + 1) - 1; // random number between 0 and 1
 
         // This line is printing a random person's name and age from the data array
@@ -106,19 +112,24 @@ $("button").click(user.clickHandler.bind(user));
 ////////////////////////Fix this inside closure//////////////////
 var user = {
     tournament: "The Masters",
-    data: [
-        { name: "T. Woods", age: 37 },
-        { name: "P. Mickelson", age: 43 }
+    data: [{
+            name: "T. Woods",
+            age: 37
+        },
+        {
+            name: "P. Mickelson",
+            age: 43
+        }
     ],
 
-    clickHandler: function() {
+    clickHandler: function () {
         // the use of this.data here is fine, because "this" refers to the user object, and data is a property on the user object.
 
         this.data.forEach(
             //anonymous functions can't access outerfunctions this
             //we can make a local variable for the outer function and let that = this; and use that in the anonymous function
 
-            function(person) {
+            function (person) {
                 // But here inside the anonymous function (that we pass to the forEach method),
                 // "this" no longer refers to the user object.
                 // This inner function cannot access the outer function's "this"
@@ -140,16 +151,21 @@ user.clickHandler(); // What is "this" referring to? [object Window]
 
 var user = {
     tournament: "The Masters",
-    data: [
-        { name: "T. Woods", age: 37 },
-        { name: "P. Mickelson", age: 43 }
+    data: [{
+            name: "T. Woods",
+            age: 37
+        },
+        {
+            name: "P. Mickelson",
+            age: 43
+        }
     ],
 
-    clickHandler: function(event) {
+    clickHandler: function (event) {
         // To capture the value of "this" when it refers to the user object, we have to set it to another variable here:
         // We set the value of "this" to theUserObj variable, so we can use it later
         var theUserObj = this;
-        this.data.forEach(function(person) {
+        this.data.forEach(function (person) {
             // Instead of using this.tournament, we now use theUserObj.tournament
             console.log(person.name + " is playing at " + theUserObj.tournament);
         })
@@ -165,18 +181,28 @@ user.clickHandler();
 ///////////////////////////////////////////Fix this when method is assigned to a variable
 
 // This data variable is a global variable
-var data = [
-    { name: "Samantha", age: 12 },
-    { name: "Alexis", age: 14 }
+var data = [{
+        name: "Samantha",
+        age: 12
+    },
+    {
+        name: "Alexis",
+        age: 14
+    }
 ];
 
 var user = {
     // this data variable is a property on the user object
-    data: [
-        { name: "T. Woods", age: 37 },
-        { name: "P. Mickelson", age: 43 }
+    data: [{
+            name: "T. Woods",
+            age: 37
+        },
+        {
+            name: "P. Mickelson",
+            age: 43
+        }
     ],
-    showData: function(event) {
+    showData: function (event) {
         var randomNum = ((Math.random() * 2 | 0) + 1) - 1; // random number between 0 and 1
 
         // This line is adding a random person from the data array to the text field
@@ -221,10 +247,34 @@ function fn() {
 
 var obj = {
     length: 5,
-    method: function(fn) {
+    method: function (fn) {
         fn(); //10  window.length
         arguments[0](); //2   arguments.length
     }
 };
 
 obj.method(fn, 1);
+
+
+
+
+//////////////////////arrow functions doesn't rebind this 
+
+let person = {
+    talks() {
+        console.log(this); //person object
+
+        setTimeout(function () {
+            console.log(this); //window object
+        }, 1000);
+    }
+}
+let person = {
+    talks() {
+        console.log(this); //person object
+
+        setTimeout(() => {
+            console.log(this); //person object, it will inherit the scope of the context it was written at
+        }, 1000);
+    }
+}

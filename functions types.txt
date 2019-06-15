@@ -138,7 +138,7 @@ window.setTimeout(function(){
   alert(1 + 2);
 }, 500);
 
-Function names in ECMAScript are nothing more than variables, meaning we can pass them around like variables.
+Function names in ECMAScript are nothing more than objects, meaning we can pass them around like variables.
  Many methods (like setTimeout()) take functions as arguments. This is a common pattern for defining callbacks.
 In these examples, we define them in line, but we could also pass in predefined functions.
 
@@ -196,7 +196,31 @@ is functionally equivalent to:
 var sum = function(num1, num2) {
   return num1 + num2;
 };
+
 Arrow functions are function expressions, and as such, they are usable in all the contexts shown above (variable assignment,
- passed as an argument, etc.). You may see slight syntactical variations across uses (as shown with in the example with optional brackets). 
+ passed as an argument, etc.).
+  You may see slight syntactical variations across uses (as shown with in the example with optional brackets). 
 Here's a good blog post that explains the syntax and it's variations.
 
+
+
+//////////////////////arrow functions doesn't rebind this 
+
+let person = {
+    talks() {
+        console.log(this); //person object
+
+        setTimeout(function () {
+            console.log(this); //window object
+        }, 1000);
+    }
+}
+let person = {
+    talks() {
+        console.log(this); //person object
+
+        setTimeout(() => {
+            console.log(this); //person object, it will inherit the scope of the context it was written at
+        }, 1000);
+    }
+}

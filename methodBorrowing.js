@@ -21,7 +21,10 @@ var hero = {
 var stoleSecretIdentity = hero.getSecretIdentity;
 
 console.log(stoleSecretIdentity());
+
 console.log(hero.getSecretIdentity());
+console.log(stoleSecretIdentity.bind(hero)()) ;
 
 //undefined
+//John Doe
 //John Doe

@@ -1,8 +1,10 @@
 /*
 What is a closure?
 A closure is an inner function that has access to the outer (enclosing) function’s variables—scope chain.
- The closure has three scope chains: it has access to its own scope (variables defined between its curly brackets), 
- it has access to the outer function’s variables, and it has access to the global variables.
+The closure has three scope chains: 
+        it has access to its own scope (variables defined between its curly brackets), 
+        it has access to the outer function’s variables,
+        and it has access to the global variables.
 
 The inner function has access not only to the outer function’s variables, but also to the outer function’s parameters. 
 Note that the inner function cannot call the outer function’s arguments object, however, 
@@ -40,7 +42,7 @@ counterFromZero(); //return 1
 counterFromTen(); //return 10
 counterFromTen(); //return 11
 
-//closure can also access outerfunction parameters
+//closure can also access outer Function parameters
 
 function CreateCounter(startingValue, IsIncreasing) {
     let counterStartingValue = startingValue;
@@ -126,7 +128,9 @@ function celebrityIDCreator(theCelebrities) {
 
 var actionCelebs = [{ name: "Stallone", id: 0 }, { name: "Cruise", id: 0 }, { name: "Willis", id: 0 }];
 var createIdForActionCelebs = celebrityIDCreator(actionCelebs);
-
+createIdForActionCelebs[0].id() //103
+createIdForActionCelebs[1].id() //103
+createIdForActionCelebs[2].id() //103
 
 /*
  var stalloneID = createIdForActionCelebs [0];
@@ -174,6 +178,7 @@ console.log(cruiseID.id); // 101
 (function(x) {
     return (function(y) {
         console.log(x);
+        console.log(y);
     })(2)
 })(1);
 

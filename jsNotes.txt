@@ -51,7 +51,8 @@ f=999; w=777;  document.write(eval(f + w));  // returns 1776
 
 ==javascript hoisting  variables with var are hoisted and will be undefined 
   js function declaration will be hoisted 
-  any variables with let and const  willnot be hoisted 
+  any variables with let and const  will be hoisted  but will give you reference error if you access them before initializatio
+  //see hoisting
 
 
 ==js objects fall in 4 categories 

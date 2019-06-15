@@ -17,7 +17,7 @@ function showName() {
 
 
 // Both the variable and the function are named myName
-var myName; 
+var myName;
 function myName() {
     console.log("Rich");
 }
@@ -93,3 +93,29 @@ function inner() {
     b = 3; // b is 3
     console.log(b); // output "3"
 }
+
+
+
+//////////////////////////////////////important 
+x = y = "global";
+(function() {
+    x; // undefined
+    y; // Reference error: y is not defined
+
+    var x = "local";
+    let y = "local";
+}());
+
+/**
+ * The difference between var/function/function* declarations and let/const/class declara­tions is the initialisation.
+The former are initialised with undefined or the (generator) function right when the binding is created at the top of the scope. 
+The lexically declared variables however stay uninitialised. This means that a ReferenceError exception is thrown when you try to access it.
+ It will only get initialised when the let/const/class statement is evaluated,
+ everything before (above) that is called the temporal dead zone.
+
+ Quoting ECMAScript 6 (ECMAScript 2015) specification's, let and const declarations section,
+
+The variables are created when their containing Lexical Environment is instantiated but may not be accessed in any way until the variable’s LexicalBinding is evaluated.
+
+So, to answer your question, yes, let and const hoist but you cannot access them before the actual declaration is evaluated at runtime.
+ */

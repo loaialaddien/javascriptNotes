@@ -7,7 +7,7 @@ for (let animal of animals) {
     // Random name for our animal
     let nameIdx = Math.floor(Math.random() * names.length);
 
-    console.log(`${names[nameIdx]} the ${animal}`);
+    console.log(`${names[nameIdx]} the ${animal}`); //using `` and ${} is called string template
 }
 // Henry the 🐔
 // Melvin the 🐷
