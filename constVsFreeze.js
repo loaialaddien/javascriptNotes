@@ -6,7 +6,7 @@ function isItFlying() {
     if (canAlligatorsFly) {
         console.log("Yeah I'm flying");
     }
-
+}
     isItFlying(); // Yeah I'm flying
 
     const alligatorColor = "green";
