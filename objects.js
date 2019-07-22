@@ -80,3 +80,26 @@ var objclone = Object.assign({}, obj);
 
 // Object.clone() will just do a shallow copy, not a deep copy.
 //  This means that nested objects aren’t copied. They still refer to the same nested objects as the original:
+
+
+
+
+/////referencing another key from the same object
+// This can be achieved by using constructor function instead of literal
+
+var o = new (function() {
+  this.foo = "it";
+  this.bar = this.foo + " works";
+})();
+
+alert(o.bar);
+
+///or
+var obj = {
+  key1: "it ",
+  key2: function() {
+    return this.key1 + " works!";
+  }
+};
+
+alert(obj.key2());
